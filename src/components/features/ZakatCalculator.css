@@ -1,0 +1,80 @@
+.zakat-calculator {
+    margin-bottom: var(--space-xl);
+}
+
+.zakat-card {
+    max-width: 400px;
+}
+
+.zakat-title {
+    margin-bottom: var(--space-lg);
+    font-size: 1.1rem;
+}
+
+.zakat-input-group {
+    margin-bottom: var(--space-lg);
+}
+
+.zakat-label {
+    display: block;
+    margin-bottom: var(--space-sm);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.zakat-input {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.zakat-results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.result-value {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.result-row.highlight {
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border-glass);
+}
+
+.result-row.highlight .result-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.zakat-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ===== LIGHT MODE STYLES ===== */
+[data-theme="light"] .zakat-results {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .result-row.highlight {
+    border-top-color: rgba(0, 0, 0, 0.08);
+}

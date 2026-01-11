@@ -1,0 +1,278 @@
+.gold-converter {
+    margin-bottom: var(--space-xl);
+}
+
+.converter-card {
+    padding: var(--space-lg);
+}
+
+.converter-title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--space-lg);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.converter-subtitle {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* Form Layout */
+.converter-form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.input-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.amount-input,
+.gold-select {
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+}
+
+.amount-input:focus,
+.gold-select:focus {
+    outline: none;
+    border-color: var(--gold-muted);
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+}
+
+.gold-select {
+    cursor: pointer;
+}
+
+.gold-select option {
+    background: var(--bosphorus-midnight);
+    color: var(--text-primary);
+}
+
+.gold-select optgroup {
+    font-weight: 600;
+    color: var(--gold);
+}
+
+/* Quick Presets */
+.quick-presets {
+    display: flex;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.preset-btn {
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.preset-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.preset-btn.active {
+    background: rgba(255, 215, 0, 0.15);
+    border-color: var(--gold-muted);
+    color: var(--gold);
+}
+
+/* Direction Toggle */
+.direction-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space-sm);
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-bottom: var(--space-md);
+    transition: all var(--transition-fast);
+}
+
+.direction-toggle:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.direction-toggle span.active {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+.direction-toggle svg {
+    color: var(--gold-muted);
+}
+
+/* Results */
+.converter-results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.result-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.result-value.buy {
+    color: var(--text-up);
+}
+
+.result-value.sell {
+    color: var(--gold);
+}
+
+.result-row.spread {
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border-glass);
+    margin-top: var(--space-xs);
+}
+
+.result-value.spread-value {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Gram Equivalent */
+.gram-equivalent {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 215, 0, 0.08);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-sm);
+}
+
+.eq-icon {
+    font-size: 1.2rem;
+    color: var(--gold);
+}
+
+.eq-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Price Reference */
+.price-reference {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .converter-form {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-presets {
+        justify-content: center;
+    }
+
+    .result-value {
+        font-size: 1rem;
+    }
+}
+
+/* ===== LIGHT MODE STYLES ===== */
+[data-theme="light"] .amount-input,
+[data-theme="light"] .gold-select {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .amount-input:focus,
+[data-theme="light"] .gold-select:focus {
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 2px rgba(204, 153, 0, 0.1);
+}
+
+[data-theme="light"] .gold-select option {
+    background: #fff;
+}
+
+[data-theme="light"] .preset-btn {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .preset-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .preset-btn.active {
+    background: rgba(204, 153, 0, 0.12);
+    border-color: var(--gold-deep);
+    color: var(--gold-deep);
+}
+
+[data-theme="light"] .direction-toggle {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .converter-results {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .result-value.sell {
+    color: var(--gold-deep);
+}
+
+[data-theme="light"] .gram-equivalent {
+    background: rgba(204, 153, 0, 0.08);
+}

@@ -1,0 +1,138 @@
+/* Premium Theme Toggle - Sun/Moon Animation */
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: var(--gold-dark);
+    transform: scale(1.05);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--gold-pure);
+    outline-offset: 2px;
+}
+
+/* Icon container for animation */
+.theme-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-pure);
+    transition: all var(--transition-base);
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+}
+
+/* Sun icon - shown in dark mode */
+.theme-toggle[data-theme="dark"] .theme-icon {
+    transform: rotate(0deg) scale(1);
+}
+
+/* Moon icon - shown in light mode */
+.theme-toggle[data-theme="light"] .theme-icon {
+    transform: rotate(0deg) scale(1);
+}
+
+/* Rotation animation on toggle */
+.theme-toggle.switching .theme-icon {
+    animation: icon-rotate 0.4s var(--ease-bounce);
+}
+
+@keyframes icon-rotate {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(0.8);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+/* Glow pulse effect */
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--radius-full);
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    pointer-events: none;
+}
+
+.theme-toggle:hover::before {
+    opacity: 1;
+}
+
+/* Light mode adjustments */
+[data-theme="light"] .theme-toggle {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background: rgba(255, 248, 220, 0.9);
+    border-color: var(--gold-deep);
+}
+
+[data-theme="light"] .theme-icon {
+    color: var(--gold-deep);
+    filter: drop-shadow(0 0 6px rgba(204, 153, 0, 0.4));
+}
+
+/* Tooltip */
+.theme-toggle-wrapper {
+    position: relative;
+}
+
+.theme-toggle-tooltip {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 10px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-fast);
+    z-index: 10;
+}
+
+.theme-toggle-wrapper:hover .theme-toggle-tooltip {
+    opacity: 1;
+}
+
+[data-theme="light"] .theme-toggle-tooltip {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}

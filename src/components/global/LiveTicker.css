@@ -1,0 +1,187 @@
+/* Premium Live Ticker - World Class Fintech Style */
+
+.live-ticker {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    height: 44px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(10, 15, 30, 0.98) 0%, rgba(5, 10, 20, 0.95) 100%);
+    backdrop-filter: blur(var(--blur-lg));
+    -webkit-backdrop-filter: blur(var(--blur-lg));
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 0 var(--space-md);
+    gap: var(--space-md);
+}
+
+/* Subtle gold accent line at top */
+.live-ticker::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 10%, var(--gold-dark) 50%, transparent 90%);
+    opacity: 0.5;
+}
+
+.ticker-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+    padding-right: var(--space-md);
+    border-right: 1px solid var(--border-subtle);
+}
+
+/* Premium pulsing vitality dot */
+.vitality-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.vitality-dot::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    animation: vitality-pulse 2s ease-in-out infinite;
+}
+
+.vitality-dot.connected {
+    background: var(--color-up);
+    box-shadow: 0 0 10px var(--color-up);
+}
+
+.vitality-dot.connected::before {
+    background: var(--color-up);
+    opacity: 0.3;
+}
+
+.vitality-dot.disconnected {
+    background: var(--color-down);
+    box-shadow: 0 0 10px var(--color-down);
+}
+
+.vitality-dot.disconnected::before {
+    background: var(--color-down);
+    opacity: 0;
+}
+
+@keyframes vitality-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+.market-status {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-up);
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
+}
+
+.ticker-track {
+    flex: 1;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.ticker-content {
+    display: flex;
+    gap: var(--space-xl);
+    width: max-content;
+}
+
+.ticker-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    white-space: nowrap;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.ticker-item:hover {
+    background: rgba(255, 215, 0, 0.08);
+}
+
+.ticker-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.ticker-value {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--gold-pure);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .live-ticker {
+        height: 40px;
+    }
+
+    .market-status {
+        display: none;
+    }
+
+    .ticker-brand {
+        padding-right: var(--space-sm);
+    }
+
+    .ticker-value {
+        font-size: 0.8rem;
+    }
+}
+
+/* ===== LIGHT MODE STYLES ===== */
+[data-theme="light"] .live-ticker {
+    background: linear-gradient(180deg, rgba(255, 252, 245, 0.98) 0%, rgba(248, 245, 238, 0.95) 100%);
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .live-ticker::before {
+    background: linear-gradient(90deg, transparent 10%, var(--gold-deep) 50%, transparent 90%);
+    opacity: 0.4;
+}
+
+[data-theme="light"] .ticker-brand {
+    border-right-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .market-status {
+    color: var(--color-up);
+    text-shadow: none;
+}
+
+[data-theme="light"] .ticker-item:hover {
+    background: rgba(204, 153, 0, 0.08);
+}
+
+[data-theme="light"] .ticker-value {
+    color: var(--gold-deep);
+    text-shadow: none;
+}

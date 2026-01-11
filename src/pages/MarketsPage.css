@@ -1,0 +1,17 @@
+.markets-page {
+    padding-bottom: var(--space-2xl);
+}
+
+.page-header {
+    margin-bottom: var(--space-xl);
+}
+
+.page-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+}
+
+.page-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}

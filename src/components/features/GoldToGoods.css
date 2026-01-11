@@ -1,0 +1,85 @@
+.gold-to-goods {
+    margin-bottom: var(--space-xl);
+}
+
+.section-title {
+    margin-bottom: var(--space-md);
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.goods-carousel {
+    margin: 0 calc(var(--space-md) * -1);
+    padding: 0 var(--space-md);
+}
+
+.goods-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    min-width: 220px;
+    width: 220px;
+}
+
+.goods-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+.goods-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.goods-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.goods-value {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-xs);
+}
+
+.goods-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+}
+
+.goods-unit {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.goods-comparison {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.75rem;
+}
+
+@media (max-width: 480px) {
+    .goods-card {
+        min-width: 180px;
+        width: 180px;
+    }
+
+    .goods-icon {
+        font-size: 2rem;
+    }
+
+    .goods-number {
+        font-size: 1.25rem;
+    }
+}
+
+/* ===== LIGHT MODE STYLES ===== */
+[data-theme="light"] .goods-number {
+    color: var(--gold-deep);
+}

@@ -1,0 +1,125 @@
+/* Premium GlassCard Utilities */
+
+.glass-card {
+    position: relative;
+    transition: all var(--transition-base);
+}
+
+/* Shimmer loading state */
+.glass-card.loading {
+    overflow: hidden;
+}
+
+.glass-card.loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 215, 0, 0.05) 50%,
+            transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Multiple animation support */
+.glass-card.animate-glow {
+    animation: border-glow 2s ease-in-out infinite;
+}
+
+.glass-card-gold.animate-glow {
+    animation: pulse-gold 3s ease-in-out infinite;
+}
+
+/* Hero variant */
+.glass-card.hero {
+    background: linear-gradient(145deg, rgba(50, 65, 100, 0.6) 0%, rgba(20, 30, 55, 0.85) 100%);
+    border: 1px solid var(--border-glass-strong);
+    box-shadow:
+        var(--shadow-lg),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 0 40px rgba(255, 215, 0, 0.08);
+}
+
+.glass-card.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 100% 100% at 50% -30%, var(--gold-glow-soft) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.glass-card.hero:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        var(--shadow-xl),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        var(--shadow-gold);
+}
+
+/* Floating variant */
+.glass-card.floating {
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Compact variant */
+.glass-card.compact {
+    padding: var(--space-sm) var(--space-md);
+}
+
+/* ===== LIGHT MODE STYLES ===== */
+[data-theme="light"] .glass-card {
+    background: linear-gradient(135deg, rgba(255, 252, 248, 0.9) 0%, rgba(255, 250, 242, 0.95) 100%);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .glass-card:hover::before {
+    background: radial-gradient(ellipse 100% 100% at 50% -20%, rgba(204, 153, 0, 0.06) 0%, transparent 50%);
+}
+
+[data-theme="light"] .glass-card-hover:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08), 0 0 20px rgba(204, 153, 0, 0.08);
+    border-color: rgba(204, 153, 0, 0.25);
+}
+
+[data-theme="light"] .glass-card-gold {
+    background: linear-gradient(135deg, rgba(255, 252, 245, 0.95) 0%, rgba(255, 248, 235, 0.98) 100%);
+    border-color: rgba(204, 153, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), 0 0 25px rgba(204, 153, 0, 0.1);
+}
+
+[data-theme="light"] .glass-card-gold::before {
+    background: radial-gradient(ellipse 150% 80% at 50% -30%, rgba(204, 153, 0, 0.12) 0%, transparent 60%);
+}
+
+[data-theme="light"] .glass-card-gold::after {
+    background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
+    opacity: 0.5;
+}
+
+[data-theme="light"] .glass-card.hero {
+    background: linear-gradient(145deg, rgba(255, 252, 248, 0.95) 0%, rgba(255, 248, 238, 0.98) 100%);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06), 0 0 30px rgba(204, 153, 0, 0.06);
+}
+
+[data-theme="light"] .glass-card.hero::before {
+    background: radial-gradient(ellipse 100% 100% at 50% -30%, rgba(204, 153, 0, 0.08) 0%, transparent 60%);
+}
+
+[data-theme="light"] .glass-card.hero:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 0 40px rgba(204, 153, 0, 0.12);
+}
+
+[data-theme="light"] .glass-card.loading::after {
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(204, 153, 0, 0.06) 50%,
+            transparent 100%);
+}
+
+[data-theme="light"] .glass-card.floating {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 8px 20px rgba(0, 0, 0, 0.05);
+}

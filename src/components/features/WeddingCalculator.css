@@ -1,0 +1,146 @@
+.wedding-calculator {
+    margin-bottom: var(--space-xl);
+}
+
+.calculator-card {
+    /* Full width on mobile */
+}
+
+.calculator-title {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+}
+
+.calculator-subtitle {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.budget-input-group {
+    margin-bottom: var(--space-lg);
+}
+
+.budget-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+.budget-slider-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.budget-slider-row .slider {
+    flex: 1;
+}
+
+.budget-text-input {
+    width: 140px;
+    text-align: right;
+    font-weight: 600;
+}
+
+.basket-display {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.basket-title {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+}
+
+.basket-coins {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.basket-empty {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.coin-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+}
+
+.coin-image {
+    font-size: 1.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: transform 0.2s ease;
+}
+
+.coin-image:hover {
+    transform: scale(1.2);
+}
+
+.coin-overflow {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-left: 4px;
+}
+
+.coin-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+    margin-left: var(--space-xs);
+}
+
+.basket-summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border-glass);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.summary-row.remaining {
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .budget-slider-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .budget-text-input {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ===== LIGHT MODE STYLES ===== */
+[data-theme="light"] .basket-display {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .basket-summary {
+    border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .coin-label {
+    color: var(--gold-deep);
+}

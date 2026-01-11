@@ -1,0 +1,139 @@
+.ceyrek-page {
+    padding-bottom: var(--space-2xl);
+}
+
+.spoke-header {
+    margin-bottom: var(--space-lg);
+}
+
+.back-btn {
+    font-size: 0.9rem;
+}
+
+/* Hero Price Card */
+.price-hero {
+    margin-bottom: var(--space-xl);
+}
+
+.hero-card {
+    text-align: center;
+    padding: var(--space-xl);
+}
+
+.hero-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-sm);
+}
+
+.hero-name {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-lg);
+}
+
+.hero-prices {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
+.hero-price-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.hero-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.hero-price {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+}
+
+.hero-divider {
+    width: 1px;
+    height: 50px;
+    background: var(--border-glass);
+}
+
+.hero-change {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Bank Comparison */
+.bank-comparison {
+    margin-bottom: var(--space-xl);
+}
+
+.comparison-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.bank-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+}
+
+.bank-row.highlight {
+    background: rgba(255, 215, 0, 0.1);
+    margin-top: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border-glass);
+}
+
+.bank-name {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.bank-price {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+@media (max-width: 480px) {
+    .hero-prices {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .hero-divider {
+        width: 60%;
+        height: 1px;
+    }
+
+    .hero-price {
+        font-size: 1.75rem;
+    }
+}
+
+/* ===== LIGHT MODE STYLES ===== */
+[data-theme="light"] .hero-divider {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .hero-price {
+    color: var(--gold-deep);
+}
+
+[data-theme="light"] .bank-row.highlight {
+    background: rgba(204, 153, 0, 0.08);
+    border-top-color: rgba(0, 0, 0, 0.08);
+}
