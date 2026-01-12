@@ -7,6 +7,7 @@ interface GlassCardProps {
     className?: string;
     padding?: 'none' | 'sm' | 'md' | 'lg';
     onClick?: () => void;
+    style?: React.CSSProperties;
 }
 
 export const GlassCard = ({
@@ -14,7 +15,8 @@ export const GlassCard = ({
     variant = 'default',
     className = '',
     padding = 'md',
-    onClick
+    onClick,
+    style
 }: GlassCardProps) => {
     const paddingClass = padding !== 'none' ? `p-${padding}` : '';
     const variantClass = variant === 'gold' ? 'glass-card-gold' :
@@ -27,6 +29,7 @@ export const GlassCard = ({
             onClick={onClick}
             role={onClick ? 'button' : undefined}
             tabIndex={onClick ? 0 : undefined}
+            style={style}
         >
             {children}
         </div>

@@ -16,11 +16,16 @@ const quickChips = [
     { id: 'eur', label: 'Euro' },
 ];
 
+import { LiveBlogSchema } from '../components/seo/LiveBlogSchema';
+import { TrustBox } from '../components/global/TrustBox';
+import { NeuralCurrencyWidget } from '../components/neural/NeuralCurrencyWidget';
+
 export const HomePage = () => {
     const [activeChip, setActiveChip] = useState('gram');
 
     return (
         <div className="home-page">
+            <LiveBlogSchema />
             {/* Header */}
             <header className="page-header">
                 <div className="header-brand">
@@ -42,7 +47,7 @@ export const HomePage = () => {
             {/* Hero - Spread Matrix */}
             <SpreadMatrix />
 
-            {/* Quick Chips */}
+            {/* Quick Chips - Now Links for SEO? No, keep as filter for chart. Links should be in PriceTable. */}
             <div className="quick-chips">
                 {quickChips.map((chip) => (
                     <button
@@ -67,6 +72,7 @@ export const HomePage = () => {
             {/* Sentiment + News Row */}
             <div className="sentiment-news-row">
                 <div className="sentiment-col">
+                    <NeuralCurrencyWidget />
                     <SentimentMeter />
                 </div>
                 <div className="news-col">
@@ -86,9 +92,21 @@ export const HomePage = () => {
                                 <span className="news-headline">Gram altın 3.200 TL'yi geçti</span>
                             </a>
                         </div>
+                        <div style={{
+                            marginTop: '12px',
+                            fontSize: '0.7rem',
+                            color: 'rgba(255,255,255,0.4)',
+                            textAlign: 'right',
+                            borderTop: '1px solid rgba(255,255,255,0.05)',
+                            paddingTop: '8px'
+                        }}>
+                            Haber Kaynağı: <span style={{ color: '#d4af37' }}>TG Finans Masası</span>
+                        </div>
                     </GlassCard>
                 </div>
             </div>
+
+            <TrustBox />
         </div>
     );
 };

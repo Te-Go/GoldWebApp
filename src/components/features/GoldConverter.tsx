@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useGoldPrices } from '../../context/GoldContext';
 import { GlassCard } from '../ui/GlassCard';
-import { ArrowRight, RefreshCw } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 import { gramWeights } from '../../data/extendedMarketData';
 import './GoldConverter.css';
 

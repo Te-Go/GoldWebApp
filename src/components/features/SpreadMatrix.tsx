@@ -1,4 +1,4 @@
-import { useSpread, useMacro, useGoldPrice } from '../../context/GoldContext';
+import { useSpread, useMacro } from '../../context/GoldContext';
 import { GlassCard } from '../ui/GlassCard';
 import { AlertTriangle } from 'lucide-react';
 import './SpreadMatrix.css';
@@ -6,7 +6,6 @@ import './SpreadMatrix.css';
 export const SpreadMatrix = () => {
     const spread = useSpread();
     const macro = useMacro();
-    const gramPrice = useGoldPrice('gram');
 
     const bankSpread = spread.bankAvgSell - spread.bankAvgBuy;
     const bazaarSpread = spread.bazaarSell - spread.bazaarBuy;

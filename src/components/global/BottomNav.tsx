@@ -1,4 +1,4 @@
-import { useState } from 'react';
+
 import { Home, TrendingUp, Calculator, Shield } from 'lucide-react';
 import './BottomNav.css';
 

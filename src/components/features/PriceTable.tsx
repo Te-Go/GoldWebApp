@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { useGoldPrices } from '../../context/GoldContext';
 import { useWatchlist } from '../../context/WatchlistContext';
 import { GlassCard } from '../ui/GlassCard';
@@ -94,10 +95,10 @@ export const PriceTable = () => {
                                             </div>
                                             <div className="td-col td-name">
                                                 <span className="gold-icon">{price.icon}</span>
-                                                <div className="name-stack">
+                                                <Link to={`/altin/${price.id}`} className="name-stack link-hover">
                                                     <span className="gold-name">{price.nameTr}</span>
                                                     <span className="gold-subname">{price.name}</span>
-                                                </div>
+                                                </Link>
                                             </div>
                                             <div className="td-col td-sell tabular-nums">
                                                 ₺{formatPrice(price.sell)}

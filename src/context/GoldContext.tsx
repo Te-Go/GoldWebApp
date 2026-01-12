@@ -10,6 +10,12 @@ interface GoldContextType {
     isLoading: boolean;
     error: string | null;
     refreshData: () => Promise<void>;
+    significantMove: {
+        hasMove: boolean;
+        asset?: string;
+        direction?: 'up' | 'down';
+        percent?: number;
+    } | null;
 }
 
 const GoldContext = createContext<GoldContextType | undefined>(undefined);
@@ -48,8 +54,12 @@ export const GoldProvider = ({ children }: GoldProviderProps) => {
         setError(null);
 
         try {
-            // Fetch from CollectAPI
+            // Fetch Gold Prices
             const apiPrices = await getGoldPrices(previousPricesRef.current);
+
+            // Fetch Currency Data (Parallel or Sequential - Sequential for now to simplify error handling)
+            // But we use 'getCurrencyData' from collectApi
+            const currencyData = await import('../services/collectApi').then(m => m.getCurrencyData()).catch(() => null);
 
             // Update previous prices for next comparison
             const newPricesMap = new Map<string, { buy: number; sell: number }>();
@@ -84,6 +94,12 @@ export const GoldProvider = ({ children }: GoldProviderProps) => {
                 return {
                     ...prev,
                     prices: updatedPrices,
+                    macro: {
+                        ...prev.macro,
+                        usdTry: currencyData?.usd || prev.macro.usdTry,
+                        eurTry: currencyData?.eur || prev.macro.eurTry,
+                        btcUsd: currencyData?.btc || prev.macro.btcUsd,
+                    },
                     lastUpdate: new Date().toISOString()
                 };
             });
@@ -99,6 +115,24 @@ export const GoldProvider = ({ children }: GoldProviderProps) => {
             setIsLoading(false);
         }
     }, []);
+
+    // Memoize the significant move to avoid recalculation on every render
+    const significantMove = (() => {
+        // Check for significant moves (> 0.5%)
+        const gramGold = payload.prices.find(p => p.id === 'gram' || p.name === 'Gram Altın');
+        if (gramGold) {
+            const absChange = Math.abs(gramGold.changePercent);
+            if (absChange >= 0.5) {
+                return {
+                    hasMove: true,
+                    asset: 'Gram Altın',
+                    direction: gramGold.changePercent > 0 ? 'up' as const : 'down' as const,
+                    percent: absChange
+                };
+            }
+        }
+        return null; // No significant move
+    })();
 
     // Fetch data on mount and poll for updates every 60 seconds
     useEffect(() => {
@@ -146,7 +180,8 @@ export const GoldProvider = ({ children }: GoldProviderProps) => {
             lastUpdate,
             isLoading,
             error,
-            refreshData
+            refreshData,
+            significantMove
         }}>
             {children}
         </GoldContext.Provider>

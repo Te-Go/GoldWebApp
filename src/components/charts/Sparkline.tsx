@@ -25,7 +25,7 @@ export const Sparkline = ({
     const isUp = data[data.length - 1] > data[0];
     const trendColor = showTrend
         ? (isUp ? '#22c55e' : '#ef4444')  // green / red hex colors
-        : '#ffd700';  // gold default
+        : color;
 
     // Transform to recharts format
     const chartData = data.map((value, index) => ({ index, value }));

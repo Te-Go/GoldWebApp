@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
+import { HelmetProvider } from 'react-helmet-async'
 
 // Mount into WordPress container or fallback to root
 const rootElement = document.getElementById('gold-terminal-root') || document.getElementById('root');
@@ -8,7 +9,9 @@ const rootElement = document.getElementById('gold-terminal-root') || document.ge
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
-      <App />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
     </React.StrictMode>,
   );
 } else {

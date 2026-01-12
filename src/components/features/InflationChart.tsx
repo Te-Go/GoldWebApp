@@ -8,9 +8,13 @@ import './InflationChart.css';
 type TimeRange = '1W' | '1M' | '3M' | '6M' | '1Y';
 type GoldType = 'gram' | 'ceyrek';
 
-export const InflationChart = () => {
+interface InflationChartProps {
+    goldType?: GoldType;
+}
+
+export const InflationChart = ({ goldType: initialGoldType = 'gram' }: InflationChartProps) => {
     const [timeRange, setTimeRange] = useState<TimeRange>('1M');
-    const [goldType, setGoldType] = useState<GoldType>('gram');
+    const [goldType, setGoldType] = useState<GoldType>(initialGoldType);
     const [showEnag, setShowEnag] = useState(false);
     const { payload } = useGold();
 
