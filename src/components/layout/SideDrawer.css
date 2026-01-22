@@ -1,0 +1,121 @@
+.drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.drawer-backdrop.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.drawer-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: #fff;
+    z-index: 1001;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+[data-theme='dark'] .drawer-panel {
+    background: #1a1a1a;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+}
+
+.drawer-panel.open {
+    transform: translateX(0);
+}
+
+.drawer-header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .drawer-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.drawer-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.drawer-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 0;
+}
+
+.drawer-section {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+[data-theme='dark'] .drawer-section {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.section-label {
+    padding: 0 24px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.drawer-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 24px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 15px;
+    color: var(--text-primary, #333);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+[data-theme='dark'] .drawer-item {
+    color: #eee;
+}
+
+.drawer-item:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme='dark'] .drawer-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.drawer-footer {
+    padding: 16px;
+    text-align: center;
+    color: #888;
+    font-size: 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}

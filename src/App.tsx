@@ -4,7 +4,6 @@ import { GoldProvider } from './context/GoldContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { WatchlistProvider } from './context/WatchlistContext';
 import { AlertsProvider } from './context/AlertsContext';
-import { LiveTicker } from './components/global/LiveTicker';
 import { BottomNav } from './components/global/BottomNav';
 import { HomePage } from './pages/HomePage';
 import { MarketsPage } from './pages/MarketsPage';
@@ -14,6 +13,9 @@ import { ProductDetailPage } from './pages/ProductDetailPage';
 import { OrganizationSchema } from './components/seo/OrganizationSchema';
 import { FAQSchema } from './components/seo/FAQSchema';
 import { DynamicTitle } from './components/seo/DynamicTitle';
+import { TopAppBar } from './components/layout/TopAppBar';
+import { NewsPage } from './pages/NewsPage';
+import { ArticlePage } from './pages/ArticlePage';
 import { StaleDataBanner } from './components/global/StaleDataBanner';
 import './index.css';
 
@@ -46,16 +48,16 @@ const AppContent = () => {
     <div className="app-container">
       <OrganizationSchema />
       <FAQSchema />
-      <DynamicTitle />
-      <StaleDataBanner />
-      <LiveTicker />
+      <TopAppBar />
 
-      <main className="main-content container">
+      <main className="main-content container" style={{ paddingTop: '10px' }}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/markets" element={<MarketsPage />} />
           <Route path="/calculator" element={<CalculatorPage />} />
           <Route path="/safe" element={<SafePage />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/news/:slug" element={<ArticlePage />} />
           <Route path="/altin/:goldType" element={<ProductDetailPage />} />
           <Route path="/metal/:goldType" element={<ProductDetailPage />} />
         </Routes>
