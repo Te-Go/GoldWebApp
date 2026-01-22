@@ -8,8 +8,10 @@ export const LiveTicker = () => {
     const tickerItems = [
         { label: 'USD/TL', value: macro.usdTry.toFixed(2), prefix: '₺' },
         { label: 'GRAM', value: payload.prices.find(p => p.id === 'gram')?.sell.toFixed(2) || '0', prefix: '₺' },
+        { label: 'GÜMÜŞ', value: payload.prices.find(p => p.id === 'gumus')?.sell.toFixed(2) || '0', prefix: '₺' },
         { label: 'ONS', value: payload.prices.find(p => p.id === 'ons')?.sell.toFixed(2) || '0', prefix: '$' },
         { label: 'BTC', value: (macro.btcUsd / 1000).toFixed(1) + 'K', prefix: '$' },
+        { label: 'PLATİN', value: payload.prices.find(p => p.id === 'platin')?.sell.toFixed(2) || '0', prefix: '₺' },
         { label: 'EUR/TL', value: macro.eurTry.toFixed(2), prefix: '₺' },
     ];
 

@@ -134,17 +134,53 @@ export const GoldProvider = ({ children }: GoldProviderProps) => {
         return null; // No significant move
     })();
 
-    // Fetch data on mount and poll for updates every 60 seconds
+    // Visibility-aware polling: pause when tab is hidden, resume when visible
     useEffect(() => {
-        // Fetch immediately on mount
+        let pollInterval: ReturnType<typeof setInterval> | null = null;
+
+        const startPolling = () => {
+            // Clear any existing interval
+            if (pollInterval) clearInterval(pollInterval);
+            // Poll every 60 seconds when visible
+            pollInterval = setInterval(() => {
+                refreshData();
+            }, 60000);
+        };
+
+        const stopPolling = () => {
+            if (pollInterval) {
+                clearInterval(pollInterval);
+                pollInterval = null;
+            }
+        };
+
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                console.log('⏸️ Tab hidden - pausing price polling');
+                stopPolling();
+            } else {
+                console.log('▶️ Tab visible - resuming price polling');
+                // Refresh immediately on tab focus, then resume interval
+                refreshData();
+                startPolling();
+            }
+        };
+
+        // Initial fetch on mount
         refreshData();
 
-        // Then poll every 60 seconds
-        const interval = setInterval(() => {
-            refreshData();
-        }, 60000);
+        // Start polling if tab is visible
+        if (!document.hidden) {
+            startPolling();
+        }
 
-        return () => clearInterval(interval);
+        // Listen for visibility changes
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        return () => {
+            stopPolling();
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
     }, [refreshData]);
 
     // Update market status based on time

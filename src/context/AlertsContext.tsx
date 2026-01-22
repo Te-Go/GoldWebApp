@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from 'react';
 import { useGold } from './GoldContext';
 
 export interface PriceAlert {
@@ -24,8 +24,24 @@ const AlertsContext = createContext<AlertsContextType | undefined>(undefined);
 
 const STORAGE_KEY = 'gold_price_alerts';
 
+// =============================================================================
+// NOTIFICATION THROTTLING CONFIGURATION
+// =============================================================================
+const NOTIFICATION_COOLDOWN_MS = 30000; // 30 seconds between notifications per asset
+
 interface AlertsProviderProps {
     children: ReactNode;
+}
+
+/**
+ * Safely write to localStorage with error handling
+ */
+function safeStorageSet(key: string, value: string): void {
+    try {
+        localStorage.setItem(key, value);
+    } catch {
+        console.warn(`localStorage unavailable for ${key}`);
+    }
 }
 
 export const AlertsProvider = ({ children }: AlertsProviderProps) => {
@@ -40,6 +56,9 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
     });
     const [hasPermission, setHasPermission] = useState(false);
 
+    // Track last notification time per goldId to prevent notification floods
+    const lastNotificationTimeRef = useRef<Map<string, number>>(new Map());
+
     // Check notification permission on mount
     useEffect(() => {
         if ('Notification' in window) {
@@ -47,17 +66,20 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
         }
     }, []);
 
-    // Persist to localStorage whenever alerts change
+    // Persist to localStorage whenever alerts change (with error handling)
     useEffect(() => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(alerts));
+        safeStorageSet(STORAGE_KEY, JSON.stringify(alerts));
     }, [alerts]);
 
-    // Check alerts against current prices
+    // Check alerts against current prices with throttling
     useEffect(() => {
         if (!hasPermission || alerts.length === 0) return;
 
         const untriggeredAlerts = alerts.filter(a => !a.triggered);
         if (untriggeredAlerts.length === 0) return;
+
+        const now = Date.now();
+        const alertsToTrigger: PriceAlert[] = [];
 
         untriggeredAlerts.forEach(alert => {
             const price = payload.prices.find(p => p.id === alert.goldId);
@@ -73,19 +95,53 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
             }
 
             if (shouldTrigger) {
-                // Show notification
-                new Notification('💰 Altın Fiyat Alarmı!', {
-                    body: `${alert.goldName} fiyatı ₺${currentPrice.toLocaleString('tr-TR')} oldu! (Hedef: ₺${alert.targetPrice.toLocaleString('tr-TR')})`,
-                    icon: '🪙',
-                    tag: alert.id,
-                });
+                // Check throttle: only notify if cooldown has passed for this asset
+                const lastNotifTime = lastNotificationTimeRef.current.get(alert.goldId) || 0;
+                const timeSinceLastNotif = now - lastNotifTime;
 
-                // Mark as triggered
-                setAlerts(prev => prev.map(a =>
-                    a.id === alert.id ? { ...a, triggered: true } : a
-                ));
+                if (timeSinceLastNotif >= NOTIFICATION_COOLDOWN_MS) {
+                    alertsToTrigger.push(alert);
+                } else {
+                    console.log(
+                        `⏳ Throttling notification for ${alert.goldName}`,
+                        `(${Math.round((NOTIFICATION_COOLDOWN_MS - timeSinceLastNotif) / 1000)}s remaining)`
+                    );
+                }
             }
         });
+
+        // Fire notifications in batch (deduplicated by goldId)
+        const notifiedGoldIds = new Set<string>();
+
+        alertsToTrigger.forEach(alert => {
+            // Only one notification per goldId per cycle
+            if (notifiedGoldIds.has(alert.goldId)) return;
+            notifiedGoldIds.add(alert.goldId);
+
+            const price = payload.prices.find(p => p.id === alert.goldId);
+            if (!price) return;
+
+            const currentPrice = price.sell;
+
+            // Show notification
+            new Notification('💰 Altın Fiyat Alarmı!', {
+                body: `${alert.goldName} fiyatı ₺${currentPrice.toLocaleString('tr-TR')} oldu! (Hedef: ₺${alert.targetPrice.toLocaleString('tr-TR')})`,
+                icon: '🪙',
+                tag: alert.goldId, // Use goldId as tag to replace previous notifications for same asset
+            });
+
+            // Update throttle timestamp
+            lastNotificationTimeRef.current.set(alert.goldId, now);
+            console.log(`🔔 Notification sent for ${alert.goldName}`);
+        });
+
+        // Mark all triggered alerts
+        if (alertsToTrigger.length > 0) {
+            const triggeredIds = new Set(alertsToTrigger.map(a => a.id));
+            setAlerts(prev => prev.map(a =>
+                triggeredIds.has(a.id) ? { ...a, triggered: true } : a
+            ));
+        }
     }, [payload.prices, alerts, hasPermission]);
 
     const requestPermission = useCallback(async () => {

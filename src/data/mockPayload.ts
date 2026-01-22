@@ -190,6 +190,96 @@ export const mockPayload: GoldPayload = {
             icon: '🔘'
         },
         {
+            id: 'gumus',
+            name: 'Gram Silver',
+            nameTr: 'Gram Gümüş',
+            buy: 33.45,
+            sell: 34.12,
+            change: 0.85,
+            changePercent: 2.15,
+            icon: '🥈'
+        },
+        {
+            id: 'gumus_ons',
+            name: 'Ounce Silver',
+            nameTr: 'Gümüş ONS',
+            buy: 29.85,
+            sell: 29.95,
+            change: 0.45,
+            changePercent: 1.52,
+            icon: '🥈'
+        },
+        {
+            id: 'platin',
+            name: 'Gram Platinum',
+            nameTr: 'Gram Platin',
+            buy: 1085.20,
+            sell: 1105.50,
+            change: 12.50,
+            changePercent: 1.14,
+            icon: '⚙️'
+        },
+        {
+            id: 'platin_ons',
+            name: 'Ounce Platinum',
+            nameTr: 'Platin ONS',
+            buy: 965.40,
+            sell: 970.10,
+            change: 8.20,
+            changePercent: 0.85,
+            icon: '⚙️'
+        },
+        {
+            id: 'paladyum',
+            name: 'Gram Palladium',
+            nameTr: 'Gram Paladyum',
+            buy: 1150.80,
+            sell: 1205.20,
+            change: -15.40,
+            changePercent: -1.25,
+            icon: '🏭'
+        },
+        {
+            id: 'paladyum_ons',
+            name: 'Ounce Palladium',
+            nameTr: 'Paladyum ONS',
+            buy: 1045.50,
+            sell: 1055.80,
+            change: -12.50,
+            changePercent: -1.18,
+            icon: '🏭'
+        },
+        {
+            id: 'rodyum',
+            name: 'Gram Rhodium',
+            nameTr: 'Gram Rodyum',
+            buy: 4500.00,
+            sell: 4750.00,
+            change: 120.00,
+            changePercent: 2.60,
+            icon: '🧪'
+        },
+        {
+            id: 'bakir',
+            name: 'Kilo Copper',
+            nameTr: 'Bakır (kg)',
+            buy: 320.50,
+            sell: 345.00,
+            change: 5.50,
+            changePercent: 1.62,
+            icon: '🥉'
+        },
+        {
+            id: 'bronz',
+            name: 'Kilo Bronze',
+            nameTr: 'Bronz (kg)',
+            buy: 280.00,
+            sell: 310.00,
+            change: 2.00,
+            changePercent: 0.65,
+            icon: '🛡️'
+        },
+        {
             id: 'ons',
             name: 'Ounce Gold',
             nameTr: 'ONS Altın',

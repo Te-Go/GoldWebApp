@@ -12,9 +12,11 @@ import { Helmet } from 'react-helmet-async';
 // 1. Investment: Gram, Ons, Külçe -> Charts & Spread Focus
 // 2. Coins: Ceyrek, Yarim, Tam, Cumhuriyet -> Wedding/Gift Focus
 // 3. Jewelry: Bilezik, 14/22 Ayar -> Labor Cost Focus
+// 4. Industrial/Other: Silver, Platinum, Palladium, Copper -> Generic Investment
 
 const getTemplateType = (id: string) => {
     if (['gram', 'ons', 'kulce', 'has_altin'].includes(id)) return 'investment';
+    if (['gumus', 'gumus_ons', 'platin', 'platin_ons', 'paladyum', 'paladyum_ons', 'rodyum', 'bakir', 'bronz'].includes(id)) return 'investment'; // Treat as investment for now
     if (['bilezik_22', 'bilezik_14', '14ayar', '22ayar', 'ziynet'].includes(id)) return 'jewelry';
     return 'coin'; // Default (Ceyrek, etc.)
 };
@@ -37,6 +39,17 @@ export const ProductDetailPage = () => {
 
     // Neural Context Analysis
     const getNeuralAnalysis = () => {
+        // Specific checks for industrial metals
+        if (['gumus', 'gumus_ons'].includes(price.id)) {
+            return `${price.nameTr} sanayi talebi ile hareketleniyor. Altın/Gümüş rasyosu takip edilmeli.`;
+        }
+        if (['platin', 'platin_ons', 'paladyum', 'paladyum_ons'].includes(price.id)) {
+            return `${price.nameTr}, otomotiv endüstrisindeki talep değişimlerine duyarlıdır. Volatilite yüksek olabilir.`;
+        }
+        if (['rodyum', 'bakir', 'bronz'].includes(price.id)) {
+            return `${price.nameTr}, küresel sanayi üretimi ve enerji maliyetlerine göre fiyatlanmaktadır.`;
+        }
+
         if (template === 'investment') {
             if (price.changePercent > 0.5) return `${price.nameTr} bugün güçlü duruyor. Enflasyona karşı koruma aracı olarak talep görüyor.`;
             return `${price.nameTr} alım fırsatı veriyor olabilir. Banka makas aralıklarına dikkat edin.`;

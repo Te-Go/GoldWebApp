@@ -57,6 +57,7 @@ const AppContent = () => {
           <Route path="/calculator" element={<CalculatorPage />} />
           <Route path="/safe" element={<SafePage />} />
           <Route path="/altin/:goldType" element={<ProductDetailPage />} />
+          <Route path="/metal/:goldType" element={<ProductDetailPage />} />
         </Routes>
       </main>
 
